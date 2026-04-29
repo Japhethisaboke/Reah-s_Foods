@@ -11,7 +11,7 @@ const About = () => {
     {
       icon: Leaf,
       title: "Fresh Ingredients",
-      description: "We source the freshest local produce and premium proteins. No preservatives, no shortcuts just real, wholesome food.",
+      description: "We source the freshest local produce and premium proteins. No preservatives, no shortcuts, just real, wholesome food.",
     },
     {
       icon: Users,

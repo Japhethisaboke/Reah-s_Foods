@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { Link2, Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -105,7 +105,7 @@ const Footer = () => {
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <Instagram className="h-5 w-5 mt-0.5 text-accent" />
+                <Link2 className="h-5 w-5 mt-0.5 text-accent" />
                 <div className="flex flex-col">
                   <a
                     href="https://instagram.com/reahsfoods"
@@ -148,7 +148,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-background/50 hover:text-background transition-colors"
             >
-              <Instagram className="h-5 w-5" />
+              <Link2 className="h-5 w-5" />
             </a>
             <a
               href="https://wa.me/254710883315"

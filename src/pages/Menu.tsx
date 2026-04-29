@@ -33,7 +33,11 @@ const getNextMonday = () => {
   const daysUntilNextMonday = ((8 - dayOfWeek) % 7) || 7;
   const nextMonday = new Date(today);
   nextMonday.setDate(today.getDate() + daysUntilNextMonday);
-  return nextMonday.toISOString().slice(0, 10);
+  // Use local date parts to avoid UTC offset shifting the day (e.g. EAT = UTC+3)
+  const year = nextMonday.getFullYear();
+  const month = String(nextMonday.getMonth() + 1).padStart(2, "0");
+  const day = String(nextMonday.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 };
 
 const getItemKey = (mealType: MealType, category: string, itemName: string) => `${mealType}:${category}:${itemName}`;
@@ -236,7 +240,7 @@ const Menu = () => {
 
       <div className="container mx-auto px-4 py-10">
         <div className="grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)]">
-          <aside className="rounded-3xl border border-border bg-card p-6 shadow-soft sticky top-24 h-fit">
+          <aside className="rounded-3xl border border-border bg-card p-6 shadow-soft lg:sticky lg:top-24 h-fit order-2 lg:order-1">
             <div className="flex items-center gap-3 text-foreground mb-6">
               <CalendarDays className="h-5 w-5 text-teal-600" />
               <div>
@@ -340,8 +344,8 @@ const Menu = () => {
             </div>
           </aside>
 
-          <div className="space-y-8">
-            <div className="grid gap-4 xl:grid-cols-[2fr_1fr] items-end">
+          <div className="space-y-8 order-1 lg:order-2">
+            <div className="grid gap-4 md:grid-cols-[2fr_1fr] items-end">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -370,7 +374,7 @@ const Menu = () => {
             <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
               <TabsList className="mb-8 w-full grid grid-cols-3 h-auto rounded-3xl border border-border bg-card p-1">
                 {Object.entries(mealMaps).map(([key, value]) => (
-                  <TabsTrigger key={key} value={key} className="rounded-3xl py-3 text-sm md:text-base">
+                  <TabsTrigger key={key} value={key} className="rounded-3xl py-2 sm:py-3 text-xs sm:text-sm md:text-base">
                     {value.name}
                   </TabsTrigger>
                 ))}

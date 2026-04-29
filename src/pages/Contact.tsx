@@ -1,34 +1,36 @@
 import { useState } from "react";
-import { Phone, Mail, MapPin, Instagram, Clock, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Link2, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
+
+const whatsappNumber = "254710883315";
 
 const Contact = () => {
-  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message sent!",
-      description: "Thank you for reaching out. We'll get back to you soon!",
-    });
-    
+
+    const text = [
+      "*Contact Message - Reah's Foods*",
+      "",
+      `*Name:* ${formData.name.trim()}`,
+      `*Email:* ${formData.email.trim()}`,
+      "",
+      "*Message:*",
+      formData.message.trim(),
+      "",
+      "_Sent via Reah's Foods Contact page_",
+    ].join("\n");
+
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank");
     setFormData({ name: "", email: "", message: "" });
-    setIsSubmitting(false);
   };
 
   const contactInfo = [
@@ -45,7 +47,7 @@ const Contact = () => {
       link: "mailto:reahsfoods@gmail.com",
     },
     {
-      icon: Instagram,
+      icon: Link2,
       label: "Instagram",
       value: "@reahsfoods",
       link: "https://instagram.com/reahsfoods",
@@ -115,9 +117,9 @@ const Contact = () => {
                   required
                 />
               </div>
-              <Button type="submit" size="lg" className="gap-2" disabled={isSubmitting}>
-                <Send className="h-4 w-4" />
-                {isSubmitting ? "Sending..." : "Send Message"}
+              <Button type="submit" size="lg" className="gap-2">
+                <Phone className="h-4 w-4" />
+                Send via WhatsApp
               </Button>
             </form>
           </div>
@@ -183,7 +185,7 @@ const Contact = () => {
         </div>
 
         {/* Delivery Zones */}
-        <section className="mt-16 p-8 rounded-2xl bg-card shadow-soft">
+        <section className="mt-16 p-4 sm:p-8 rounded-2xl bg-card shadow-soft">
           <h2 className="font-heading text-2xl font-bold mb-6 text-center">Delivery Zones</h2>
           <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-8">
             We deliver fresh meals across Nairobi. Check if we deliver to your area:

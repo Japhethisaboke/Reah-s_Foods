@@ -205,10 +205,10 @@ const MealPlans = () => {
             </p>
           </div>
 
-          <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card shadow-elevated min-h-[680px]">
+          <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-border bg-card shadow-elevated min-h-[560px] sm:min-h-[640px] md:min-h-[680px]">
             <div
               className={cn(
-                "absolute inset-0 p-8 overflow-hidden transition-transform duration-700 ease-in-out",
+                "absolute inset-0 p-4 sm:p-8 overflow-hidden transition-transform duration-700 ease-in-out",
                 step === "terms" ? "translate-x-0" : "-translate-x-full"
               )}
             >
@@ -263,7 +263,7 @@ const MealPlans = () => {
 
             <div
               className={cn(
-                "absolute inset-0 p-8 overflow-y-auto transition-transform duration-700 ease-in-out",
+                "absolute inset-0 p-4 sm:p-8 overflow-y-auto transition-transform duration-700 ease-in-out",
                 step === "form" ? "translate-x-0" : "translate-x-full"
               )}
             >
@@ -314,7 +314,7 @@ const MealPlans = () => {
 
                   <div>
                     <p className="mb-4 text-sm font-medium text-foreground">Goal</p>
-                    <div className="grid gap-4 sm:grid-cols-3">
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                       {goalOptions.map(({ value, label, Icon, description }) => {
                         const selected = goal === value;
                         return (
